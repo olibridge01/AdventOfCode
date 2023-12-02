@@ -2,7 +2,7 @@ import numpy as np
 import re
 
 # Load data
-data = np.loadtxt('01-Dec.txt', dtype=str)
+data = np.loadtxt('data/01-Dec.txt', dtype=str)
 
 letter_digits = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 

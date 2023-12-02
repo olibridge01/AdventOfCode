@@ -46,7 +46,7 @@ def get_prod_sum(min_balls):
         return prod_sum
 
 # Compute solutions
-min_balls = get_min_ball_colors('02-Dec.txt')
+min_balls = get_min_ball_colors('data/02-Dec.txt')
 id_sum = get_id_sum(min_balls, max_red, max_green, max_blue) # Part 1
 prod_sum = get_prod_sum(min_balls) # Part 2
 
