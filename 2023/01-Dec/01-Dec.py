@@ -40,5 +40,5 @@ for element in data:
     total_calibration_part1 += get_calibration_val(element)
     total_calibration_part2 += get_calibration_val(element, letter_digits)
 
-print(total_calibration_part1)
-print(total_calibration_part2)
+print(f'Part 1: {total_calibration_part1}')
+print(f'Part 2: {total_calibration_part2}')
