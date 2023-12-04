@@ -52,5 +52,3 @@ prod_sum = get_prod_sum(min_balls) # Part 2
 
 print(f'Part 1: {id_sum}')
 print(f'Part 2: {prod_sum}')
-
-            
