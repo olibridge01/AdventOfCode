@@ -1,5 +1,4 @@
 import numpy as np
-import re
 
 def get_input(filename):
     """Get seeds to check and maps to apply from file"""
@@ -11,7 +10,6 @@ def get_input(filename):
         # Convert input to list of maps
         maps = []
         for line in lines:
-            # print(line)
             if not line[0].isdigit() and line != '\n':    
                 current_map = []
             if line[0].isdigit():
