@@ -1,25 +1,21 @@
 def get_rank(hand: str, part1: bool = True) -> list:
     """Get rank of a hand as list of various priority values."""
     # Get unique cards and number of occurrences of each card
-    cards = set(hand) 
-    n_occur = sorted([hand.count(card) for card in cards], reverse=True)
+    cards = set(hand)
+    card_ranks = '23456789TJQKA' if part1 else 'J23456789TQKA'
+    n_occur = [hand.count(char) for char in card_ranks]
     
     # Compute the rank list for part 1 or part 2
     if part1:
-        card_ranks = dict(zip('23456789TJQKA', range(1, 14))) # Card ranks
         rank_list = [5 - len(cards), max(n_occur)]
-        rank_list.extend([card_ranks[card] for card in hand])
+        rank_list.extend([card_ranks.index(card) for card in hand])
     else:
-        card_ranks = dict(zip('J23456789TQKA', range(1, 14))) # Modified card ranks
-        if 'J' in cards:
-            if hand.count('J') == max(n_occur):
-                rank_list = [5 - len(cards) + 1, sum(n_occur[:2])] if len(cards) > 1 else [4,5]
-            else:
-                rank_list = [5 - len(cards) + 1, max(n_occur) + hand.count('J')] if len(cards) > 1 else [4,5]
-        else:
-            rank_list = [5 - len(cards), max(n_occur)]
+        if 'J' in cards and len(cards) > 1:
+            cards.remove('J')
+        jokers = n_occur.pop(0)
+        rank_list = [5 - len(cards), max(n_occur) + jokers]
 
-        rank_list.extend([card_ranks[card] for card in hand])
+        rank_list.extend([card_ranks.index(card) for card in hand])
     return rank_list
 
 def get_winnings(hands: list, part1: bool = True) -> int:
@@ -28,7 +24,7 @@ def get_winnings(hands: list, part1: bool = True) -> int:
     hands = sorted(hands, key=lambda x: get_rank(x[0], part1))
 
     # Compute total winnings
-    total_winnings = sum([(i + 1) * hand[1] for i, hand in enumerate(hands)])
+    total_winnings = sum([rank * bid for rank, (_, bid) in enumerate(hands, start=1)])
     return total_winnings
 
 with open('data/07-Dec.txt', 'r') as f:
