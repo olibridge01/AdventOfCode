@@ -1,7 +1,7 @@
 import numpy as np
 import re
 
-def get_points(filename):
+def get_points(filename: str) -> tuple:
     """Get total points and sum of cards won from file"""
     with open (filename, 'r') as f:
         total_points = 0

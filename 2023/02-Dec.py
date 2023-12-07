@@ -6,7 +6,7 @@ max_red = 12
 max_green = 13
 max_blue = 14
 
-def get_min_ball_colors(filename):
+def get_min_ball_colors(filename: str) -> list:
     """Get minimum possible ball numbers for each game"""
     min_balls = []
 
@@ -25,7 +25,7 @@ def get_min_ball_colors(filename):
     
     return min_balls
 
-def get_id_sum(min_balls, max_red, max_green, max_blue):
+def get_id_sum(min_balls: list, max_red: int, max_green: int, max_blue: int) -> int:
     """Get sum of IDs of possible games given maximum ball numbers"""
     id_sum = 0
 
@@ -36,7 +36,7 @@ def get_id_sum(min_balls, max_red, max_green, max_blue):
 
     return id_sum
 
-def get_prod_sum(min_balls):
+def get_prod_sum(min_balls: list) -> int:
         """Get sum of products of minimum possible ball numbers for each game"""
         prod_sum = 0
     

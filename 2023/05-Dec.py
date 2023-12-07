@@ -1,6 +1,6 @@
 import numpy as np
 
-def get_input(filename):
+def get_input(filename: str) -> tuple:
     """Get seeds to check and maps to apply from file"""
     with open(filename) as f:
         # Get seeds to be checked
@@ -19,7 +19,7 @@ def get_input(filename):
 
     return seeds, maps
     
-def pointwise_output(seed, input):
+def pointwise_output(seed: int, input: list) -> int:
     """Get output of a seed after applying all maps"""
     for map in input:
         for mapping in map:
@@ -28,7 +28,7 @@ def pointwise_output(seed, input):
                 break
     return seed
 
-def splitrange_output(seeds, input):
+def splitrange_output(seeds: list, input: list) -> list:
     """Get output ranges of seeds after applying all maps"""
     # Compute seed ranges for Part 2
     seed_ranges = [(seeds[i], seeds[i] + seeds[i+1]) for i in range(0, len(seeds), 2)]

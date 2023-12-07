@@ -4,7 +4,7 @@ data = np.loadtxt('data/06-Dec.txt', dtype=object)[:,1:] # Load data
 data1 = data.astype(int).T # Part 1
 data2 = np.array([''.join(line) for line in data]).astype(int).T[None,:] # Part 2
 
-def get_win_ways(data):
+def get_win_ways(data: np.ndarray) -> int:
     """Get number of winning ways for boat race data"""
     win_product = 1
     for race in data:

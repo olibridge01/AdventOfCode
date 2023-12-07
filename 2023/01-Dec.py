@@ -6,7 +6,7 @@ data = np.loadtxt('data/01-Dec.txt', dtype=str)
 
 letter_digits = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 
-def get_calibration_val(element, letter_digits=None):
+def get_calibration_val(element: str, letter_digits: list = None) -> int:
     """Get calibration value for an element in data"""
 
     # Get all numbers from element

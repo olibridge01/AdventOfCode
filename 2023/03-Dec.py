@@ -1,7 +1,7 @@
 import numpy as np
 import re
 
-def add_border(data):
+def add_border(data: list) -> list:
     """Add border of '.'s to data"""
     for i, line in enumerate(data):
         data[i] = '.' + line + '.'
@@ -9,7 +9,7 @@ def add_border(data):
     data.append('.' * len(data[0]))
     return data
 
-def get_numbers(data):
+def get_numbers(data: list) -> list:
     """Get indices of all numbers present in data"""
     numbers = []
     for i, line in enumerate(data):
@@ -30,7 +30,7 @@ def get_numbers(data):
                 numbers.append((current_number, current_number_i, current_number_j))
     return numbers
 
-def get_sum_part_numbers(data):
+def get_sum_part_numbers(data: list) -> tuple:
     """Get sum of all part numbers"""
 
     # Get positions of all numbers in data
