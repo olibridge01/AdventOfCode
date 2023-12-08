@@ -31,5 +31,9 @@ with open('data/07-Dec.txt', 'r') as f:
     data = f.read().splitlines()
     hands = [(line.split()[0], int(line.split()[1])) for line in data]
 
+import time as t
+start = t.time()
 print(f'Part 1: {get_winnings(hands)}')
 print(f'Part 2: {get_winnings(hands, part1=False)}')
+end = t.time()
+print(f'Runtime: {end - start}')
