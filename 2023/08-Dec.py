@@ -1,7 +1,7 @@
 import re
 import numpy as np
 
-def path_length(start, connectivity, moves, part1=True):
+def path_length(start: str, connectivity: dict, moves: list, part1: bool = True) -> int:
     """Get length of path from starting node to ZZZ or --Z."""
     current_pos = start
     steps, move_idx = 0, 0
