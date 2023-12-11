@@ -1,9 +1,9 @@
 import numpy as np
 
-def rev(move):
+def rev(move: list) -> list:
     return [-i for i in move]
     
-def first_move(data):
+def first_move(data: np.ndarray) -> tuple:
     """Get first move from initial position S."""
     init_pos = np.concatenate(np.where(data == 'S'))
     for i in [[1,0],[-1,0],[0,1],[0,-1]]:
@@ -14,8 +14,7 @@ def first_move(data):
             if char != '.' and rev(i) in moves[char]:
                 return pos, i
             
-            
-def farthest_point(data, pos, i):
+def farthest_point(data: np.ndarray, pos: list, i: list) -> tuple:
     """Get farthest point from S."""
     loop_pos = [pos]
     path_length = 0
@@ -28,13 +27,10 @@ def farthest_point(data, pos, i):
     
     return np.ceil(path_length / 2).astype(int), loop_pos
 
-def enclosed_area(data, loop_pos):
+def enclosed_area(data: np.ndarray, loop_pos: list) -> int:
     """Get enclosed area by loop containing S."""
     n_points = 0
     for i, row in enumerate(data):
-        print(i)
-        inside = False
-        count = 0
         for j, _ in enumerate(row):
             n = len([k for l, k in enumerate(row[:j]) if k in ['|', 'F', '7'] and [i,l] in loop_pos])
             if [i,j] not in loop_pos:
