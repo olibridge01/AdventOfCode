@@ -1,67 +1,28 @@
-import numpy as np
-import re
-import itertools
+from functools import cache
 
-data = []
-with open('data/12-Dec.txt', 'r') as f:
-    for line in f:
-        line_dat = []
-        line_dat.append(line.strip().split(' ')[0])
-        line_dat.append([int(a) for a in line.strip().split(' ')[1].split(',')])
-        data.append(line_dat)
-
-# print(data)
-
-def get_unknowns(line):
-    unknowns = []
-    hashcount = 0
-    for i, char in enumerate(line):
-        if char == '?':
-            unknowns.append(i)
-        elif char == '#':
-            hashcount += 1
-    return unknowns, hashcount
-
-def get_combos(unknowns, k):
-    return list(itertools.combinations(unknowns, k))
-
-def check_combo(combo, line, groups):
-    filled_line = line
-    for i, char in enumerate(filled_line):
-        if char == '?':
-            if i in combo:
-                filled_line = filled_line[:i] + '#' + filled_line[i+1:]
+@cache
+def check_line(seq: str, groups: tuple, n_hash: int = 0) -> int:
+    # Base case
+    if not seq:
+        return 1 if (not groups and not n_hash) else 0
+    
+    # Recursive case
+    n = 0
+    if seq[0] in ('#', '?'):
+        n += check_line(seq[1:], groups, n_hash + 1)
+    if seq[0] in ('.', '?'):
+        if (groups and n_hash == groups[0]) or not n_hash:
+            if not n_hash:
+                n += check_line(seq[1:], groups, 0)
             else:
-                filled_line = filled_line[:i] + '.' + filled_line[i+1:]
-    
-    # Count the size of the groups of #
-    group_sizes = []
-    group_size = 0
-    for i, char in enumerate(filled_line):
-        if char == '#':
-            group_size += 1
-        else:
-            if group_size > 0:
-                group_sizes.append(group_size)
-                group_size = 0
-        if i == len(filled_line) - 1 and group_size > 0:
-            group_sizes.append(group_size)
-            
-    # print(group_sizes)
-    return 1 if group_sizes == groups else 0
-s = 0
-for line in data:
-    unknowns, hashcount = get_unknowns(line[0])
-    combos = get_combos(unknowns, sum(line[1]) - hashcount)
-    # print(combos)
-    
-    for combo in combos:
-        s += check_combo(combo, line[0], line[1])
-    
-print(s)
-    
+                n += check_line(seq[1:], groups[1:], 0)
+    return n
 
+with open('data/12-Dec.txt', 'r') as f:
+    data = [line.split() for line in f.read().splitlines()]
+    data = [(seq, tuple(int(a) for a in groups.split(','))) for seq, groups in data]
 
+unfolded_data = [('?'.join([seq] * 5), groups * 5) for seq, groups in data]
 
-
-
+print(f'Part 1: {sum([check_line(seq + ".", groups, 0) for seq, groups in data])}')
+print(f'Part 2: {sum([check_line(seq + ".", groups, 0) for seq, groups in unfolded_data])}')
