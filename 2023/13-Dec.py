@@ -10,7 +10,7 @@ def mirror_index(p: np.ndarray, part1: bool = True) -> list:
             if np.all(p[i - r:i] == np.flip(p[i:i + r], axis=0)):
                 indices.append(i)
         else:
-            if np.sum(p[i - r:i] == np.flip(p[i:i + r], axis=0),) == r * p.shape[1] - 1:
+            if np.sum(p[i - r:i] != np.flip(p[i:i + r], axis=0)) == 1:
                 indices.append(i)
     return indices
 
