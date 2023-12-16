@@ -1,7 +1,7 @@
 import numpy as np
 
 def hash(s):
-    """Run HASH algortithm on a string."""
+    """Run HASH algorithm on a string."""
     n = 0
     for c in s:
         n += ord(c)
