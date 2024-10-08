@@ -1,7 +1,8 @@
 import numpy as np
 import heapq
 
-def min_heat(data, start, end, min_move, max_move):
+def min_heat(data: np.ndarray, start: tuple, end: tuple, min_move: int, max_move: int) -> int:
+    """Get path of minimum heat from start to end, with min/max move constraints."""
     queue = [(0, *start, 0, 0)] # Initialise queue
     visited = set() # Initialise set of visited nodes
     while queue:

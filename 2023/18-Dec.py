@@ -1,4 +1,4 @@
-def get_area(points):
+def get_area(points: list) -> int:
     """Get area with shoelace formula."""
     area = 0
     for i in range(len(points) - 1):
@@ -6,7 +6,7 @@ def get_area(points):
         area -= points[i][1] * points[i+1][0]
     return abs(area) // 2
 
-def get_points(data, part1=True):
+def get_points(data: list, part1: bool = True) -> tuple:
     """Get points and perimeter of dig hole."""
     perimeter = 0
     points = [(0,0)]
