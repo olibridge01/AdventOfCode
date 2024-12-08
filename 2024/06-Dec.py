@@ -1,7 +1,7 @@
 import numpy as np
 from itertools import cycle
 
-def simulate(pos: np.array, data: np.array):
+def simulate(pos: np.ndarray, data: np.ndarray):
     dirs = cycle([np.array([-1, 0]), np.array([0, 1]), np.array([1, 0]), np.array([0, -1])])
     dir = next(dirs)
     
